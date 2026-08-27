@@ -17,7 +17,9 @@ list_to_train = [
                 "I am a chatbot.",
                 "How old are you?",
                 "I am ageless.",
-                "Do you have IPhone ?"
+                "Why are you so mad?",
+                "I'm not!",
+                "Do you have IPhone ?",
                 "I have everything.",
                 "Who am i?",
                 "You are a human.",
@@ -26,9 +28,28 @@ list_to_train = [
                 "I don't know what you're talking about."
 ]
 
+list_to_train2 = [
+                "Hi!",
+                "Hello!",
+                "What's your name?",
+                "I'm your assistans.",
+                "How old are you?",
+                "I am 30 years old.",
+                "Why are you so mad?",
+                "Because of you!",
+                "Do you have IPhone ?"
+                "Of course i do.",
+                "Who am i?",
+                "You are a human.",
+                "What is your job ?",
+                "I'm your assistant.",
+                "I don't know what you're talking about."
+]
+
 list_trainer = ListTrainer(bot)
 
 list_trainer.train(list_to_train)
+list_trainer.train(list_to_train2)
 
 while True:
     user_response = input("User : ")
