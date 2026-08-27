@@ -14,12 +14,14 @@
     <style>
       body {
         font-family: monospace;
+        color: #30364f;
+        background-color: #f0f0db;
       }
 
       #chatBox {
         margin-left: auto;
         margin-right: auto;
-        width: 40%;
+        width: 80%;
         margin-top: 50px;
       }
       .botText {
@@ -27,7 +29,7 @@
         font-size: 16px;
         text-align: left;
         line-height: 25px;
-        color: blue;
+        color: #30364f;
       }
       #userInput {
         margin-left: auto;
@@ -37,17 +39,29 @@
         margin-top: 50px;
       }
       #textInput {
-        border-bottom: 3px solid grey;
+        border: 3px solid #acbac4;
+        border-radius: 10px;
+        /*border-bottom: 3px solid #30364f;*/
         font-family: monospace;
         font-size: 16px;
+        width: 80%;
+        padding: 5px;
+        background-color: #acbac4;
+        color: #30364f;
       }
       #buttonInput {
         padding: 5px;
+        border-radius: 10px;
+        background-color: #acbac4;
+        color: #30364f;
         font-family: monospace;
         font-size: 16px;
       }
       h1 {
         text-align: center;
+      }
+      .userText {
+        text-align: right;
       }
     </style>
   </head>
@@ -72,14 +86,16 @@
     <script>
       function getUserResponse() {
         var userText = $("#textInput").val();
-        var userHTML = "<p class='userText'><span>" + userText + "</span></p>";
+        var userHTML =
+          "<p class='userText'> User : <span>" + userText + "</span></p>";
         $("#textInput").val("");
         $("#chatBox").append(userHTML);
         document
           .getElementById("userInput")
           .scrollIntoView((block = "start"), (behavior = "smooth"));
         $.get("/get", { userMessage: userText }).done(function (data) {
-          var botHTML = "<p class='botText'><span>" + data + "</span></p>";
+          var botHTML =
+            "<p class='botText'> ChatBot : <span>" + data + "</span></p>";
           $("#chatBox").append(botHTML);
         });
       }
