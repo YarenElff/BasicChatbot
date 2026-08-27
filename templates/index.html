@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chatbot Application</title>
 
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+
     <style>
       body {
         font-family: monospace;
@@ -47,18 +53,46 @@
   </head>
   <body>
     <h1>ChatBot App</h1>
-    <div id="chatBox">
-      <p class="botText"><span> Hi there ! </span></p>
+    <div>
+      <div id="chatBox">
+        <p class="botText"><span> Hi there ! </span></p>
+      </div>
+
+      <div id="userInput">
+        <input
+          id="textInput"
+          type="text"
+          name="userMessage"
+          placeholder="Type your message here..."
+        />
+        <input id="buttonInput" type="submit" value="Send" />
+      </div>
     </div>
 
-    <div id="userInput">
-      <input
-        id="textInput"
-        type="text"
-        name="userMessage"
-        placeholder="Type your message here..."
-      />
-      <input id="buttonInput" type="submit" value="Send" />
-    </div>
+    <script>
+      function getUserResponse() {
+        var userText = $("#textInput").val();
+        var userHTML = "<p class='userText'><span>" + userText + "</span></p>";
+        $("#textInput").val("");
+        $("#chatBox").append(userHTML);
+        document
+          .getElementById("userInput")
+          .scrollIntoView((block = "start"), (behavior = "smooth"));
+        $.get("/get", { userMessage: userText }).done(function (data) {
+          var botHTML = "<p class='botText'><span>" + data + "</span></p>";
+          $("#chatBox").append(botHTML);
+        });
+      }
+
+      $("#textInput").keypress(function (e) {
+        if (e.which == 13) {
+          getUserResponse();
+        }
+      });
+
+      $("#buttonInput").click(function () {
+        getUserResponse();
+      });
+    </script>
   </body>
 </html>
